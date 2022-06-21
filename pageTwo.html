@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script src="main.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <div class="container-fluid">
+                <img src="images/logo.png" alt="" width="100" height="75">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Page one</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="pageTwo.html">Page two</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <section>
+        <form style="max-width: 800px; margin: auto; margin-top: 30px;">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="checkPassword" placeholder="Enter your password"
+                    onkeyup="validatePassword()">
+            </div>
+            <p id="report"></p>
+            <ul class="list-group">
+                <li class="list-group-item" id="capital"><i class="bi bi-x-circle"></i> Password has a capital letter
+                </li>
+                <li class="list-group-item" id="small"><i class="bi bi-x-circle"></i> Password has a small letter</li>
+                <li class="list-group-item" id="number"><i class="bi bi-x-circle"></i> Password has a number</li>
+                <li class="list-group-item" id="symbol"><i class="bi bi-x-circle"></i> Password has a special symbol
+                </li>
+                <li class="list-group-item" id="passLength"><i class="bi bi-x-circle"></i> Password has 8 charecters at
+                    least</li>
+            </ul>
+        </form>
+    </section>
+</body>
+
+</html>
