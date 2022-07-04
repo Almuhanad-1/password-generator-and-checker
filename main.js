@@ -1,110 +1,79 @@
+
 function passwordGenerator() {
-  var length =
+  let length =
     document.getElementById("passLength").value == ""
-      ? 8
+      ? 12
       : document.getElementById("passLength").value;
-  var charset = "abcdefghijklmnopqrstuvwxyz",
+  let charset = "abcdefghijklmnopqrstuvwxyz",
     charsetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     charsetNumber = "0123456789",
-    charsetSymbol = "!@#$%^&*",
+    charsetSymbol = "!@#$%^&*/<>(){}[]\\|`~+-.?,\"';:",
     retVal = "";
 
-  if (document.getElementById("includeCapital").checked) {
-    charset += charsetCapital;
-  }
-  if (document.getElementById("includeNumbers").checked) {
-    charset += charsetNumber;
-  }
-  if (document.getElementById("includeSymbols").checked) {
-    charset += charsetSymbol;
-  }
-
-  for (var i = 0, n = charset.length; i < length; i++) {
+  /* includes capital letters to the char set */
+  document.getElementById("includeCapital").checked ? charset += charsetCapital : null;
+  /* includes numbers to the char set */
+  document.getElementById("includeNumbers").checked ? charset += charsetNumber : null;
+  /* includes symbols to the char set */
+  document.getElementById("includeSymbols").checked ? charset += charsetSymbol : null;
+  
+  /* generate random password form the charset */
+  for (i = 0, n = charset.length; i < length; i++) {
     retVal += charset.charAt(Math.floor(Math.random() * n));
   }
 
+  /* display the generated password in the text field */
   document.getElementById("textField").value = retVal;
 }
 
-// function passwordGenerator() {
-//   var length = 8,
-//     charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-//     retVal = "";
-//   for (var i = 0, n = charset.length; i < length; ++i) {
-//     retVal += charset.charAt(Math.floor(Math.random() * n));
-//   }
-//   // console.log(retVal);
-//   document.getElementById("textField").value = retVal;
-
-//   // return retVal;
-// }
 
 function validatePassword() {
-  var newPassword = document.getElementById("checkPassword").value;
+  let newPassword = document.getElementById("checkPassword").value;
   const capitalRegex = /[A-Z]/;
   const smallRegex = /[a-z]/;
   const numberRegex = /[0-9]/;
-  const symbolRegex = /[!@#$%^&*]/;
-  var capitalCheck = document.getElementById("capital");
-  var smallCheck = document.getElementById("small");
-  var numberCheck = document.getElementById("number");
-  var symbolCheck = document.getElementById("symbol");
-  var passLengthCheck = document.getElementById("passLength");
+  const symbolRegex = /[!@#$%^&*/<>(){}[\]\\|`~+-.?,\"';:]/;
+  let capitalCheck = document.getElementById("capital");
+  let smallCheck = document.getElementById("small");
+  let numberCheck = document.getElementById("number");
+  let symbolCheck = document.getElementById("symbol");
+  let passLengthCheck = document.getElementById("passLength");
 
+/* change the icon and color for the checked conditions */
   function checkIcon(myElementID) {
     myElementID.firstChild.classList.add("bi-check-square");
     myElementID.firstChild.classList.remove("bi-x-circle");
+    myElementID.style.color = "#059505";
   }
 
+/* change the icon and color for the unchecked conditions */
   function xIcon(myElementID) {
     myElementID.firstChild.classList.add("bi-x-circle");
     myElementID.firstChild.classList.remove("bi-check-square");
+    myElementID.style.color = "#212529";
   }
 
-  if (newPassword.match(capitalRegex)) {
-    capitalCheck.style.color = "#059505";
-    checkIcon(capitalCheck);
-  } else {
-    capitalCheck.style.color = "#212529";
-    xIcon(capitalCheck);
-  }
+  /* check if the password contains capital letters */
+  newPassword.match(capitalRegex) ? checkIcon(capitalCheck) : xIcon(capitalCheck);
+  /* check if the password contains small letters */
+  newPassword.match(smallRegex) ? checkIcon(smallCheck) : xIcon(smallCheck);
+  /* check if the password contains numbers */
+  newPassword.match(numberRegex) ? checkIcon(numberCheck) : xIcon(numberCheck);
+  /* check if the password contains symbols */
+  newPassword.match(symbolRegex) ? checkIcon(symbolCheck) : xIcon(symbolCheck);
+  /* check if the password is more than 8 charecters */
+  newPassword.length >= 8 ? checkIcon(passLengthCheck) : xIcon(passLengthCheck);
 
-  if (newPassword.match(smallRegex)) {
-    smallCheck.style.color = "#059505";
-    checkIcon(smallCheck);
-  } else {
-    smallCheck.style.color = "#212529";
-    xIcon(smallCheck);
-  }
+}
 
-  if (newPassword.match(numberRegex)) {
-    numberCheck.style.color = "#059505";
-    checkIcon(numberCheck);
-  } else {
-    numberCheck.style.color = "#212529";
-    xIcon(numberCheck);
-  }
+function copyFunc() {
+  /* Get the text field */
+  let copyText = document.getElementById("textField");
 
-  if (newPassword.match(symbolRegex)) {
-    symbolCheck.style.color = "#059505";
-    checkIcon(symbolCheck);
-  } else {
-    symbolCheck.style.color = "#212529";
-    xIcon(symbolCheck);
-  }
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
-  if (newPassword.length >= 8) {
-    passLengthCheck.style.color = "#059505";
-    checkIcon(passLengthCheck);
-  } else {
-    passLengthCheck.style.color = "#212529";
-    xIcon(passLengthCheck);
-  }
-
-  // if (!regularExpression.test(newPassword)) {
-  //   var reportArea = document.getElementById("report");
-  //   reportArea.innerHTML =
-  //     "password should contain atleast one number and one special character";
-  //   return false;
-  // }
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
 }
